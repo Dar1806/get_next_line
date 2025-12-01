@@ -10,7 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+char	*fill_line(int fd, char *buffer, char *left_c)
+{
+	ssize_t	read_file;
+	char	*tmp;
+
+	read_file = 1;
+	while (read_file < 0)
+		read_file = read(fd, buffer, BUFFER_SIZE);
+	
+}
+
 char	*get_next_line(int fd)
 {
+	static char	*left_c;
+	char		*buffer;
+	char		*line;
 
+	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
+	{
+		free(buffer);
+		free(left_c);
+		buffer = NULL;
+		left_c = NULL;
+		return (NULL);
+	}
+	line = fill_line(fd, buffer, left_c);
+}
+
+  int    main(void)
+{
+    char *line;
+	int fd;
+
+    fd = open("test.txt", O_RDONLY);
+    line = get_next_line(fd);
+    printf("%s\n", line);
+    free(line);
 }
