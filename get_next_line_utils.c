@@ -78,18 +78,18 @@ char	*ft_strdup(const char *s)
 	return (dest);
 }
 
-char    *ft_strchr(const char *str, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == (char)c)
-            return ((char *)&str[i]);
-        i++;
-    }
-    if ((char)c == '\0')
-        return ((char *)&str[i]);
-    return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == (char)c)
+			return ((char *)&str[i]);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)&str[i]);
+	return (NULL);
 }

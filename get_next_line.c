@@ -23,20 +23,22 @@ char	*fill_line(int fd, char *buffer, char *left_c)
 		read_file = read(fd, buffer, BUFFER_SIZE);
 		if (read_file == -1)
 		{
-			free(read_file);
+			free(left_c);
 			return (NULL);
 		}
 		else if (read_file == 0)
 			break ;
 		buffer[read_file] = '\0';
-		if (!left_c);
+		if (!left_c)
 			left_c = ft_strdup("");
 		tmp = left_c;
-
+		left_c = ft_strjoin(tmp, buffer);
+		free(tmp);
+		tmp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
-
-
-	
+	return (left_c);
 }
 
 char	*get_next_line(int fd)
@@ -57,15 +59,16 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = fill_line(fd, buffer, left_c);
+	return (line);
 }
 
-  int    main(void)
+int	main(void)
 {
     char *line;
 	int fd;
 
     fd = open("test.txt", O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
+	while ((line = get_next_line(fd)))
+		printf("aaa%s\n", line);
     free(line);
 }
