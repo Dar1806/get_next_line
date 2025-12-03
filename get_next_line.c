@@ -19,7 +19,23 @@ char	*fill_line(int fd, char *buffer, char *left_c)
 
 	read_file = 1;
 	while (read_file < 0)
+	{
 		read_file = read(fd, buffer, BUFFER_SIZE);
+		if (read_file == -1)
+		{
+			free(read_file);
+			return (NULL);
+		}
+		else if (read_file == 0)
+			break ;
+		buffer[read_file] = '\0';
+		if (!left_c);
+			left_c = ft_strdup("");
+		tmp = left_c;
+
+	}
+
+
 	
 }
 
