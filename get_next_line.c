@@ -38,8 +38,7 @@ char	*fill_line(int fd, char *buffer, char *left_c)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-/* 	printf("%s\n", left_c);
- */	return (left_c);
+	return (left_c);
 }
 
 char	*get_next_line(int fd)
