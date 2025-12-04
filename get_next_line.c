@@ -14,23 +14,23 @@
 
 char	*fill_line(int fd, char *buffer, char *left_c)
 {
-	ssize_t	read_file;
+	ssize_t	readf;
 	char	*tmp;
 
-	read_file = 1;
-	while (read_file < 0)
+	readf = 1;
+	while (readf > 0)
 	{
-		read_file = read(fd, buffer, BUFFER_SIZE);
-		if (read_file == -1)
+		readf = read(fd, buffer, BUFFER_SIZE);
+		if (readf == -1)
 		{
-			free(left_c);
+			free (left_c);
 			return (NULL);
 		}
-		else if (read_file == 0)
+		else if (readf == 0)
 			break ;
-		buffer[read_file] = '\0';
+		buffer[readf] = '\0';
 		if (!left_c)
-			left_c = ft_strdup("");
+			left_c = ft_strdup(buffer);
 		tmp = left_c;
 		left_c = ft_strjoin(tmp, buffer);
 		free(tmp);
@@ -38,7 +38,8 @@ char	*fill_line(int fd, char *buffer, char *left_c)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	return (left_c);
+/* 	printf("%s\n", left_c);
+ */	return (left_c);
 }
 
 char	*get_next_line(int fd)
@@ -50,7 +51,7 @@ char	*get_next_line(int fd)
 	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(buffer);
 		free(left_c);
@@ -59,16 +60,20 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = fill_line(fd, buffer, left_c);
+	free(buffer);
+	buffer = NULL;
+	if (!line)
+		return (NULL);
 	return (line);
 }
 
 int	main(void)
 {
-    char *line;
-	int fd;
+	char	*line;
+	int		fd;
 
-    fd = open("test.txt", O_RDONLY);
-	while ((line = get_next_line(fd)))
-		printf("aaa%s\n", line);
-    free(line);
+	line = "";
+	fd = open("test.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("premier %s\n", line);
 }
