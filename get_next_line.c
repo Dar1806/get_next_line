@@ -78,15 +78,15 @@ static char	*set_line(char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 		i++;
-	if (line[i] == 0)
+	if (line[i] == '\0')
 		return (NULL);
-	left_c = ft_substr(line, i + 1, ft_strlen(line) - i);
+	left_c = ft_substr(line, i + 1, ft_strlen(line) - i - 1);
 	if (!left_c)
 	{
 		free(left_c);
 		left_c = NULL;
 	}
-	line[i + 1] = 0;
+	line[i + 1] = '\0';
 	return (left_c);
 }
 
@@ -96,7 +96,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	char		*line;
 
-	buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -116,7 +116,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* int	main(void)
+int	main(void)
 {
 	char	*line;
 	int		fd;
@@ -131,4 +131,4 @@ char	*get_next_line(int fd)
 		free(line);
 	}
 	close(fd);
-} */
+}
