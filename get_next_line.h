@@ -31,4 +31,4 @@ int			ft_strlen(const char *str);
 char		*ft_strjoin(char const *s1, char const *s2);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 
-#endifd
+#endif
