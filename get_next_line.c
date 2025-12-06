@@ -81,9 +81,7 @@ static char	*set_line(char *line)
 	if (line[i] == '\0')
 		return (NULL);
 	left_c = ft_substr(line, i + 1, ft_strlen(line) - i - 1);
-	if (!left_c)
-		return (NULL);
-	if (left_c[0] == '\0')
+	if (!left_c || left_c[0] == '\0')
 	{
 		free(left_c);
 		return (NULL);
