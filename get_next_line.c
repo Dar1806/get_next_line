@@ -120,20 +120,3 @@ char	*get_next_line(int fd)
 	left_c = set_line(line);
 	return (line);
 }
-
-/* int	main(void)
-{
-	char	*line;
-	int		fd;
-	int		count;
-
-	line = "";
-	count = 1;
-	fd = open("test.txt", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("ligne %d : %s", count++, line);
-		free(line);
-	}
-	close(fd);
-} */
