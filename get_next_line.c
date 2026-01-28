@@ -6,7 +6,7 @@
 /*   By: nmeunier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:48:17 by afournie          #+#    #+#             */
-/*   Updated: 2026/01/28 16:57:39 by nmeunier         ###   ########.fr       */
+/*   Updated: 2026/01/28 17:03:09 by nmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,4 @@ char	*get_next_line(int fd)
 	line = stash;
 	stash = set_line(line);
 	return (line);
-}
-
-int	main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("test.txt", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (0);
 }
